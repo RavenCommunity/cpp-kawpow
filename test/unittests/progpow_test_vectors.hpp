@@ -58,7 +58,7 @@ progpow_hash_test_case progpow_hash_test_cases[] = {
                 "4cf1fa62f25b577ac822a6a28d55f8b7e3ae7fe983abd868ae00927e68c41016"},
         {170915, "5b3e8dfa1aafd3924a51f33e2d672d8dae32fa528d8b1d378d6e4db0ec5d665d", "0000000044975727",
                 "efb29147484c434f1cc59629da90fd0343e3b047407ecd36e9ad973bd51bbac5",
-                "e7e6bb3b2f9acd3864bc86f72f87237eaf475633ef650c726ac80eb0adf116b6"},
+                "e7e6bb3b2f9acd3864bc86f72f87237eaf475633ef650c726ac80eb0adf116b6"}
 
 };
 }  // namespace

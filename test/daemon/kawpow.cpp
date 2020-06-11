@@ -23,7 +23,7 @@ int main(int argc, const char* argv[])
 {
     static int epoch_number = 0;
     std::uint16_t SrvPort = DEFAULT_PORT;
-    static ethash::epoch_context_ptr context_light{nullptr, nullptr};
+    static ethash::epoch_context_full_ptr context_full{nullptr, nullptr};
 
     for (int i = 0; i < argc; ++i)
     {
@@ -41,9 +41,10 @@ int main(int argc, const char* argv[])
     }
 
     // Build context
-    if (!context_light || context_light->epoch_number != epoch_number) {
+    if (!context_full || context_full->epoch_number != epoch_number) {
         std::cout << "Building context for epoch: " << epoch_number << std::endl;
-        context_light = ethash::create_epoch_context(epoch_number);
+        context_full = ethash::create_epoch_context_full(epoch_number);
+
     }
 
     if (!event_init())
@@ -126,12 +127,12 @@ int main(int argc, const char* argv[])
 
             // Check epoch number and context
             epoch_number = (int) nHeight / ETHASH_EPOCH_LENGTH;
-            if (!context_light || context_light->epoch_number != epoch_number) {
-                context_light = ethash::create_epoch_context(epoch_number);
+            if (!context_full || context_full->epoch_number != epoch_number) {
                 std::cout << "Building new context for epoch: " << epoch_number << std::endl;
+                context_full = ethash::create_epoch_context_full(epoch_number);
             }
 
-            const auto result = progpow::hash(*context_light, (int) nHeight, header_hash, nNonce);
+            const auto result = progpow::hash(*context_full, (int) nHeight, header_hash, nNonce);
             std::string share_met = "false";
             std::string block_met = "false";
             std::string mix_match = "false";
